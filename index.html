@@ -312,8 +312,15 @@
   .sparkle-glow { filter: drop-shadow(0 0 4px #FF5733); }
 
   @media (max-width: 600px) {
-    .signup { flex-direction: column; width: 90%; max-width: 320px; }
-    .signup input { width: 100%; }
+    .signup {
+      flex-direction: column;
+      width: 100%;
+      max-width: 360px;
+      margin: 34px auto 0;
+      padding: 0 20px;
+    }
+    .signup input,
+    .signup button { width: 100%; }
     .kodoma { width: 80px; height: 100px; }
   }
 </style>
