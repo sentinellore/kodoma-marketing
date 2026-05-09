@@ -1,103 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kodoma</title>
-  <meta name="description" content="Kodoma — coming soon." />
-  <meta name="theme-color" content="#0a0a0a" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kodoma — coming soon</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    background: #0C0C0C;
+    color: #F2F2F2;
+  }
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Kodoma" />
-  <meta property="og:description" content="Coming soon." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kodoma.app" />
+  body {
+    background: radial-gradient(ellipse at center 70%, #1a1410 0%, #0C0C0C 60%);
+    position: relative;
+  }
 
-  <style>
-    :root {
-      --bg: #0a0a0a;
-      --text: #f5f5f5;
-      --muted: #888888;
-      --coral: #FF5733;
-    }
+  /* glowing pollen particles */
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #FF5733;
+    border-radius: 50%;
+    filter: blur(1px) drop-shadow(0 0 4px #FF5733);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  @keyframes float-up {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    20% { opacity: 0.5; }
+    80% { opacity: 0.5; }
+    100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+  }
+  .p1 { left: 10%; bottom: -10px; animation: float-up 12s linear infinite; animation-delay: 0s; }
+  .p2 { left: 25%; bottom: -10px; animation: float-up 15s linear infinite; animation-delay: 3s; }
+  .p3 { left: 50%; bottom: -10px; animation: float-up 18s linear infinite; animation-delay: 6s; }
+  .p4 { left: 70%; bottom: -10px; animation: float-up 14s linear infinite; animation-delay: 2s; }
+  .p5 { left: 85%; bottom: -10px; animation: float-up 16s linear infinite; animation-delay: 5s; }
+  .p6 { left: 35%; bottom: -10px; animation: float-up 13s linear infinite; animation-delay: 8s; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  .stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-    html, body {
-      height: 100%;
-    }
+  .title-block {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #FF5733;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fade-in 1s ease-out 0.3s forwards;
+  }
+  h1 {
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 800;
+    letter-spacing: -3px;
+    color: #F2F2F2;
+    line-height: 1;
+    opacity: 0;
+    animation: fade-in 1s ease-out 0.6s forwards;
+  }
+  .subtitle {
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: #909090;
+    margin-top: 18px;
+    max-width: 460px;
+    line-height: 1.55;
+    opacity: 0;
+    animation: fade-in 1s ease-out 0.9s forwards;
+  }
+  @keyframes fade-in { to { opacity: 1; } }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      padding: 2rem;
-    }
+  .signup {
+    margin-top: 34px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    animation: fade-in 1s ease-out 1.2s forwards;
+  }
+  .signup input {
+    background: #181818;
+    border: 0.5px solid #333;
+    color: #F2F2F2;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-family: inherit;
+    width: 280px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .signup input:focus { border-color: #FF5733; }
+  .signup input::placeholder { color: #606060; }
+  .signup button {
+    background: #FF5733;
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.2s;
+  }
+  .signup button:hover { background: #FF6B47; transform: translateY(-1px); }
+  .signup button:active { transform: translateY(0); }
 
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      gap: 1.5rem;
-    }
+  .footer {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #505050;
+    z-index: 10;
+    opacity: 0;
+    animation: fade-in 1s ease-out 1.5s forwards;
+  }
 
-    .wordmark {
-      font-size: clamp(3rem, 12vw, 6rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-    }
+  /* ════════════════════════════════════════════════════════════
+     KODOMA STAGE — character moves through 4 stops
+     Total cycle: 36s
+       Stop 1 — Celebrate
+       Stop 2 — Stretch (12s for full 3-stretch routine)
+       Stop 3 — Meditate
+       Stop 4 — Eat
+     ════════════════════════════════════════════════════════════ */
 
-    .wordmark .accent {
-      color: var(--coral);
-    }
+  .kodoma-stage {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
 
-    .status {
-      font-size: 1.125rem;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
+  .kodoma {
+    position: absolute;
+    bottom: 8%;
+    left: 0;
+    width: 110px;
+    height: 138px;
+    animation: kodoma-journey 36s linear infinite;
+  }
 
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.875rem;
-      padding-top: 2rem;
-    }
+  @keyframes kodoma-journey {
+    0%   { left: -10%; }
+    10%  { left: 14%; }
+    /* CELEBRATE 6s */
+    12%  { left: 14%; }
+    28%  { left: 14%; }
+    /* run 4s */
+    30%  { left: 14%; }
+    37%  { left: 35%; }
+    /* STRETCH 12s — the full 3-stretch routine */
+    39%  { left: 35%; }
+    72%  { left: 35%; }
+    /* run 3s */
+    74%  { left: 35%; }
+    79%  { left: 58%; }
+    /* MEDITATE 5s */
+    81%  { left: 58%; }
+    93%  { left: 58%; }
+    /* run 1s */
+    94%  { left: 58%; }
+    96%  { left: 80%; }
+    /* run off */
+    100% { left: 110%; }
+  }
 
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
+  .behavior {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
 
-    footer a:hover {
-      color: var(--text);
-      border-bottom-color: var(--coral);
-    }
-  </style>
+  .running { animation: show-running 36s linear infinite; }
+  @keyframes show-running {
+    0%, 11%   { opacity: 1; }
+    12%, 29%  { opacity: 0; }  /* celebrating */
+    30%, 38%  { opacity: 1; }
+    39%, 73%  { opacity: 0; }  /* stretching */
+    74%, 80%  { opacity: 1; }
+    81%, 93%  { opacity: 0; }  /* meditating */
+    94%, 100% { opacity: 1; }
+  }
+
+  .celebrating { animation: show-celebrating 36s linear infinite; }
+  @keyframes show-celebrating {
+    0%, 11%   { opacity: 0; }
+    12%, 28%  { opacity: 1; }
+    30%, 100% { opacity: 0; }
+  }
+
+  .stretching-anim { animation: show-stretching 36s linear infinite; }
+  @keyframes show-stretching {
+    0%, 38%   { opacity: 0; }
+    39%, 72%  { opacity: 1; }
+    74%, 100% { opacity: 0; }
+  }
+
+  .meditating { animation: show-meditating 36s linear infinite; }
+  @keyframes show-meditating {
+    0%, 80%   { opacity: 0; }
+    81%, 93%  { opacity: 1; }
+    94%, 100% { opacity: 0; }
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     PER-BEHAVIOR INTERNAL ANIMATIONS
+     ════════════════════════════════════════════════════════════ */
+
+  /* RUNNING */
+  @keyframes run-bounce { 0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-4px) rotate(3deg);} }
+  @keyframes arm-l-run { 0%,100%{transform:rotate(35deg);} 50%{transform:rotate(-25deg);} }
+  @keyframes arm-r-run { 0%,100%{transform:rotate(-35deg);} 50%{transform:rotate(25deg);} }
+  @keyframes streak-anim { 0%{transform:translateX(20px);opacity:0;} 30%{opacity:0.8;} 100%{transform:translateX(-30px);opacity:0;} }
+  .running .run-group { animation: run-bounce 0.5s ease-in-out infinite; transform-origin: 100px 165px; }
+  .running .arm-l { animation: arm-l-run 0.5s ease-in-out infinite; transform-origin: 65px 155px; }
+  .running .arm-r { animation: arm-r-run 0.5s ease-in-out infinite; transform-origin: 135px 155px; }
+  .running .s1 { animation: streak-anim 0.5s linear infinite; }
+  .running .s2 { animation: streak-anim 0.5s linear infinite; animation-delay: 0.15s; }
+  .running .s3 { animation: streak-anim 0.5s linear infinite; animation-delay: 0.3s; }
+
+  /* CELEBRATING */
+  @keyframes celebrate-jump { 0%,100%{transform:translateY(0);} 40%{transform:translateY(-14px);} 55%{transform:translateY(-8px);} 70%{transform:translateY(-14px);} }
+  @keyframes arm-wave-l { 0%,100%{transform:rotate(-15deg);} 50%{transform:rotate(5deg);} }
+  @keyframes arm-wave-r { 0%,100%{transform:rotate(15deg);} 50%{transform:rotate(-5deg);} }
+  @keyframes sparkle-pulse { 0%,100%{opacity:0;transform:scale(0.5);} 50%{opacity:1;transform:scale(1.4);} }
+  .celebrating .celebrate-group { animation: celebrate-jump 1s ease-in-out infinite; }
+  .celebrating .arm-up-l { animation: arm-wave-l 1s ease-in-out infinite; transform-origin: 60px 150px; }
+  .celebrating .arm-up-r { animation: arm-wave-r 1s ease-in-out infinite; transform-origin: 140px 150px; }
+  .celebrating .sp-1 { animation: sparkle-pulse 1.2s ease-in-out infinite; transform-origin: center; }
+  .celebrating .sp-2 { animation: sparkle-pulse 1.2s ease-in-out infinite; animation-delay: 0.3s; transform-origin: center; }
+  .celebrating .sp-3 { animation: sparkle-pulse 1.2s ease-in-out infinite; animation-delay: 0.6s; transform-origin: center; }
+  .celebrating .sp-4 { animation: sparkle-pulse 1.2s ease-in-out infinite; animation-delay: 0.9s; transform-origin: center; }
+
+  /* MEDITATING */
+  @keyframes meditate-breathe { 0%,100%{transform:scale(1);} 50%{transform:scale(1.025);} }
+  @keyframes aura-ripple { 0%{r:50;opacity:0.5;} 100%{r:95;opacity:0;} }
+  .meditating .meditate-group { animation: meditate-breathe 5s ease-in-out infinite; transform-origin: 100px 130px; }
+  .meditating .aura-1 { animation: aura-ripple 5s ease-out infinite; }
+  .meditating .aura-2 { animation: aura-ripple 5s ease-out infinite; animation-delay: 2.5s; }
+
+  /* STRETCHING — 3-stretch routine */
+  @keyframes body-stretch {
+    0%{transform:rotate(0) translateY(0) scaleY(1) skewX(0);}
+    8%{transform:rotate(-12deg) translateY(0) scaleY(1) skewX(0);}
+    16%{transform:rotate(0) translateY(0) scaleY(1) skewX(0);}
+    25%{transform:rotate(12deg) translateY(0) scaleY(1) skewX(0);}
+    33%{transform:rotate(0) translateY(0) scaleY(1) skewX(0);}
+    42%{transform:rotate(0) translateY(15px) scaleY(0.75) skewX(0);}
+    57%{transform:rotate(0) translateY(15px) scaleY(0.75) skewX(0);}
+    66%{transform:rotate(0) translateY(0) scaleY(1) skewX(0);}
+    77%{transform:rotate(0) translateY(0) scaleY(1) skewX(-12deg);}
+    88%{transform:rotate(0) translateY(0) scaleY(1) skewX(12deg);}
+    100%{transform:rotate(0) translateY(0) scaleY(1) skewX(0);}
+  }
+  @keyframes arm-l-stretch {
+    0%{transform:rotate(35deg) translate(0,0);}
+    8%{transform:rotate(-145deg) translate(15px,-25px);}
+    16%{transform:rotate(35deg) translate(0,0);}
+    25%{transform:rotate(-100deg) translate(0,-8px);}
+    33%{transform:rotate(35deg) translate(0,0);}
+    42%{transform:rotate(170deg) translate(0,22px);}
+    57%{transform:rotate(170deg) translate(0,22px);}
+    66%{transform:rotate(35deg) translate(0,0);}
+    77%{transform:rotate(80deg) translate(35px,0);}
+    88%{transform:rotate(-10deg) translate(-15px,0);}
+    100%{transform:rotate(35deg) translate(0,0);}
+  }
+  @keyframes arm-r-stretch {
+    0%{transform:rotate(-35deg) translate(0,0);}
+    8%{transform:rotate(100deg) translate(0,-8px);}
+    16%{transform:rotate(-35deg) translate(0,0);}
+    25%{transform:rotate(145deg) translate(-15px,-25px);}
+    33%{transform:rotate(-35deg) translate(0,0);}
+    42%{transform:rotate(-170deg) translate(0,22px);}
+    57%{transform:rotate(-170deg) translate(0,22px);}
+    66%{transform:rotate(-35deg) translate(0,0);}
+    77%{transform:rotate(10deg) translate(15px,0);}
+    88%{transform:rotate(-80deg) translate(-35px,0);}
+    100%{transform:rotate(-35deg) translate(0,0);}
+  }
+  @keyframes eyes-open-stretch { 0%,38%{opacity:1;} 42%,60%{opacity:0;} 64%,100%{opacity:1;} }
+  @keyframes eyes-closed-stretch { 0%,38%{opacity:0;} 42%,60%{opacity:1;} 64%,100%{opacity:0;} }
+  .stretching-anim .body-group { animation: body-stretch 12s ease-in-out infinite; transform-origin: 100px 165px; }
+  .stretching-anim .arm-stretch-l { animation: arm-l-stretch 12s ease-in-out infinite; transform-origin: 65px 155px; }
+  .stretching-anim .arm-stretch-r { animation: arm-r-stretch 12s ease-in-out infinite; transform-origin: 135px 155px; }
+  .stretching-anim .eyes-open { animation: eyes-open-stretch 12s ease-in-out infinite; }
+  .stretching-anim .eyes-closed { animation: eyes-closed-stretch 12s ease-in-out infinite; }
+
+  .eye-glow { filter: drop-shadow(0 0 5px #FF5733); }
+  .sparkle-glow { filter: drop-shadow(0 0 4px #FF5733); }
+
+  @media (max-width: 600px) {
+    .signup { flex-direction: column; width: 90%; max-width: 320px; }
+    .signup input { width: 100%; }
+    .kodoma { width: 80px; height: 100px; }
+  }
+</style>
 </head>
 <body>
-  <main>
-    <h1 class="wordmark">kod<span class="accent">oma</span></h1>
-    <p class="status">Coming soon.</p>
-  </main>
 
-  <footer>
-    <a href="mailto:swetharozario@gmail.com">swetharozario@gmail.com</a>
-  </footer>
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+<div class="particle p6"></div>
+
+<div class="stage">
+
+  <div class="title-block">
+    <div class="eyebrow">Kodoma</div>
+    <h1>coming&nbsp;soon</h1>
+    <p class="subtitle">A quieter way to track your health. We're putting the finishing touches on it. Drop your email to be the first to know when we launch.</p>
+
+    <form class="signup" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks ✓'; this.querySelector('input').value='';">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Notify me</button>
+    </form>
+  </div>
+
+  <div class="kodoma-stage">
+    <div class="kodoma">
+
+      <!-- RUNNING -->
+      <svg class="behavior running" width="110" height="138" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#FF5733" stroke-width="2" stroke-linecap="round" opacity="0.7">
+          <line class="s1" x1="30" y1="100" x2="50" y2="100"/>
+          <line class="s2" x1="20" y1="135" x2="40" y2="135"/>
+          <line class="s3" x1="30" y1="170" x2="50" y2="170"/>
+        </g>
+        <g class="run-group">
+          <ellipse class="arm-l" cx="65" cy="155" rx="8" ry="12" fill="#FFFFFF"/>
+          <ellipse class="arm-r" cx="135" cy="155" rx="8" ry="12" fill="#FFFFFF"/>
+          <circle cx="100" cy="165" r="28" fill="#FFFFFF"/>
+          <path d="M102 45 C 68 45, 52 70, 55 110 C 58 148, 142 148, 145 110 C 148 70, 136 45, 102 45 Z" fill="#FFFFFF"/>
+          <g class="eye-glow">
+            <ellipse cx="84" cy="95" rx="9" ry="13" fill="#FF5733"/>
+            <ellipse cx="120" cy="99" rx="9" ry="13" fill="#FF5733"/>
+          </g>
+          <path d="M97 120 L107 120" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+
+      <!-- CELEBRATING -->
+      <svg class="behavior celebrating" width="110" height="138" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <g class="sparkle-glow">
+          <path class="sp-1" d="M40 60 L43 63 L40 66 L37 63 Z" fill="#FF5733"/>
+          <path class="sp-2" d="M160 80 L164 84 L160 88 L156 84 Z" fill="#FF5733"/>
+          <path class="sp-3" d="M30 130 L32.5 132.5 L30 135 L27.5 132.5 Z" fill="#FF5733"/>
+          <path class="sp-4" d="M170 140 L172.5 142.5 L170 145 L167.5 142.5 Z" fill="#FF5733"/>
+        </g>
+        <g class="celebrate-group">
+          <ellipse class="arm-up-l" cx="60" cy="150" rx="8" ry="12" fill="#FFFFFF"/>
+          <ellipse class="arm-up-r" cx="140" cy="150" rx="8" ry="12" fill="#FFFFFF"/>
+          <circle cx="100" cy="165" r="28" fill="#FFFFFF"/>
+          <path d="M102 45 C 68 45, 52 70, 55 110 C 58 148, 142 148, 145 110 C 148 70, 136 45, 102 45 Z" fill="#FFFFFF"/>
+          <g class="eye-glow">
+            <path d="M75 95 Q84 88 93 95" stroke="#FF5733" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M111 99 Q120 92 129 99" stroke="#FF5733" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M93 117 Q102 126 111 117" stroke="#000" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+
+      <!-- STRETCHING -->
+      <svg class="behavior stretching-anim" width="110" height="138" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <g class="body-group">
+          <ellipse class="arm-stretch-l" cx="65" cy="155" rx="8" ry="12" fill="#FFFFFF"/>
+          <ellipse class="arm-stretch-r" cx="135" cy="155" rx="8" ry="12" fill="#FFFFFF"/>
+          <circle cx="100" cy="165" r="28" fill="#FFFFFF"/>
+          <path d="M102 45 C 68 45, 52 70, 55 110 C 58 148, 142 148, 145 110 C 148 70, 136 45, 102 45 Z" fill="#FFFFFF"/>
+          <g class="eyes-open eye-glow">
+            <ellipse cx="84" cy="95" rx="9" ry="13" fill="#FF5733"/>
+            <ellipse cx="120" cy="99" rx="9" ry="13" fill="#FF5733"/>
+          </g>
+          <g class="eyes-closed eye-glow">
+            <path d="M75 95 Q84 102 93 95" stroke="#FF5733" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M111 99 Q120 106 129 99" stroke="#FF5733" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M96 118 Q102 122 108 118" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+
+      <!-- MEDITATING -->
+      <svg class="behavior meditating" width="110" height="138" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <circle class="aura-1" cx="100" cy="125" r="50" fill="none" stroke="#FF5733" stroke-width="1"/>
+        <circle class="aura-2" cx="100" cy="125" r="50" fill="none" stroke="#FF5733" stroke-width="1"/>
+        <g class="meditate-group">
+          <ellipse cx="68" cy="178" rx="11" ry="6" fill="#FFFFFF" transform="rotate(-15 68 178)"/>
+          <ellipse cx="132" cy="178" rx="11" ry="6" fill="#FFFFFF" transform="rotate(15 132 178)"/>
+          <circle cx="100" cy="165" r="28" fill="#FFFFFF"/>
+          <path d="M102 45 C 68 45, 52 70, 55 110 C 58 148, 142 148, 145 110 C 148 70, 136 45, 102 45 Z" fill="#FFFFFF"/>
+          <g class="eye-glow">
+            <path d="M75 98 Q84 105 93 98" stroke="#FF5733" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M111 102 Q120 109 129 102" stroke="#FF5733" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M97 122 Q102 124 107 122" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+        </g>
+      </svg>
+
+    </div>
+  </div>
+
+  <div class="footer">© Kodoma 2026 · made with care</div>
+
+</div>
 </body>
 </html>
