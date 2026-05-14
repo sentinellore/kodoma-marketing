@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Kodoma</title>
+<meta name="description" content="How Kodoma handles your data — written plainly, no dark patterns.">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    background: #0C0C0C;
+    color: #F2F2F2;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: radial-gradient(ellipse at center top, #1a1410 0%, #0C0C0C 50%);
+    min-height: 100vh;
+    padding: 60px 24px 80px;
+  }
+
+  .container { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: #FF5733; text-transform: uppercase; margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 56px); font-weight: 800;
+    letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 18px;
+  }
+  .dates {
+    font-size: 13px; color: #707070; margin-bottom: 40px;
+    border-bottom: 0.5px solid #2a2a2a; padding-bottom: 28px;
+  }
+  .dates strong { color: #A0A0A0; font-weight: 600; }
+
+  /* Intro card */
+  .intro {
+    background: #161616;
+    border: 0.5px solid #2a2a2a;
+    border-radius: 18px;
+    padding: 26px 28px;
+    margin-bottom: 48px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: #D0D0D0;
+  }
+  .intro p + p { margin-top: 14px; }
+
+  /* Sections */
+  h2 {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.4px;
+    margin: 44px 0 14px; color: #F2F2F2;
+  }
+  h3 {
+    font-size: 15px; font-weight: 700;
+    margin: 22px 0 8px; color: #F2F2F2;
+  }
+  p, li {
+    font-size: 15px; line-height: 1.7; color: #C8C8C8;
+  }
+  p + p { margin-top: 12px; }
+  ul, ol { margin: 10px 0 10px 22px; }
+  li + li { margin-top: 6px; }
+  li strong { color: #E8E8E8; font-weight: 600; }
+  a { color: #FF5733; text-decoration: none; border-bottom: 0.5px solid rgba(255,87,51,0.4); }
+  a:hover { border-bottom-color: #FF5733; }
+
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 13px; background: #1C1C1C; padding: 2px 6px;
+    border-radius: 4px; color: #FF8B70;
+  }
+
+  .callout {
+    background: #161616;
+    border-left: 2px solid #FF5733;
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 14px;
+    color: #B8B8B8;
+    line-height: 1.6;
+  }
+
+  .disclaimer {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 0.5px solid #2a2a2a;
+    font-size: 13px;
+    color: #707070;
+    line-height: 1.65;
+  }
+
+  .footer {
+    margin-top: 48px;
+    text-align: center;
+    font-size: 11px;
+    color: #505050;
+  }
+  .footer a {
+    color: #707070;
+    border: none;
+    margin: 0 8px;
+  }
+  .footer a:hover { color: #FF5733; }
+
+  /* Pollen accent (single static one, very subtle) */
+  .pollen {
+    position: fixed;
+    width: 3px; height: 3px;
+    background: #FF5733;
+    border-radius: 50%;
+    filter: blur(1px) drop-shadow(0 0 5px #FF5733);
+    opacity: 0.25;
+    pointer-events: none;
+    top: 18%; right: 8%;
+  }
+</style>
+</head>
+<body>
+
+<span class="pollen"></span>
+
+<div class="container">
+
+  <div class="eyebrow">Privacy Policy</div>
+  <h1>How we handle your data.</h1>
+  <p class="dates">
+    <strong>Effective date:</strong> May 14, 2026 &nbsp;·&nbsp;
+    <strong>Last updated:</strong> May 14, 2026
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       INTRO — friendly, plain-language
+       ───────────────────────────────────────────────────────────── -->
+  <div class="intro">
+    <p>
+      Hi — Kodoma here. 👋 You're trusting us with some of the most personal numbers
+      you have: how much you slept, what you ate, how your heart's doing. So we want
+      to be straight with you about what we collect, what we don't, and why.
+    </p>
+    <p>
+      The short version: we only collect what we need to make the app work for you and
+      your crew. We never sell your data. We don't run ads. There's no third-party
+      tracking quietly piggybacking in the background. The longer version is below,
+      written as plainly as we could manage while still being a real privacy policy.
+    </p>
+    <p>
+      Questions, corrections, or want your data deleted? Email us anytime at
+      <a href="mailto:support@kodoma.app">support@kodoma.app</a>.
+    </p>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       1. WHO WE ARE
+       ───────────────────────────────────────────────────────────── -->
+  <h2>1. Who we are</h2>
+  <p>
+    Kodoma is a social health app — track your fitness, meals, and grocery runs, and
+    share progress with the people you care about. This policy explains how Kodoma
+    ("we," "us," "our") collects and uses information when you use our mobile app or
+    visit <a href="https://kodoma.app">kodoma.app</a>.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       2. INFO WE COLLECT
+       ───────────────────────────────────────────────────────────── -->
+  <h2>2. Information we collect</h2>
+
+  <h3>Account info</h3>
+  <ul>
+    <li>Email address</li>
+    <li>Username</li>
+    <li>Password (stored only as a one-way hash — we never see your actual password)</li>
+    <li>First and last name</li>
+  </ul>
+
+  <h3>Profile info</h3>
+  <p>The things you tell us during onboarding or edit later:</p>
+  <ul>
+    <li>Date of birth</li>
+    <li>Sex</li>
+    <li>Height and weight</li>
+    <li>Dietary preferences (allergies, diet style)</li>
+    <li>Daily targets (steps, calories, sleep, protein)</li>
+    <li>Profile photo (optional)</li>
+  </ul>
+
+  <h3>Health data</h3>
+  <p>
+    With your permission, Kodoma reads a small set of health metrics from your
+    phone's native health platform:
+  </p>
+  <ul>
+    <li><strong>iOS:</strong> Apple HealthKit</li>
+    <li><strong>Android:</strong> Google Health Connect</li>
+  </ul>
+  <p>The metrics we read:</p>
+  <ul>
+    <li>Steps</li>
+    <li>Sleep duration</li>
+    <li>Active calories burned</li>
+    <li>Resting heart rate</li>
+    <li>Heart rate variability (HRV)</li>
+    <li>Blood oxygen saturation</li>
+  </ul>
+  <div class="callout">
+    We store these as <strong>daily summaries</strong> — not raw samples. So we keep
+    "you took 8,432 steps on Tuesday," not the individual minute-by-minute readings
+    your watch recorded. Daily summaries live in our database; raw data stays on your
+    device.
+  </div>
+  <p>
+    You can revoke health access at any time — in iOS Settings → Health → Data Access &amp;
+    Devices, in Android's Health Connect app, or inside Kodoma at
+    <strong>Profile → Privacy &amp; Permissions</strong>.
+  </p>
+
+  <h3>Camera &amp; photos</h3>
+  <p>
+    When you choose to, you can use your camera inside Kodoma to:
+  </p>
+  <ul>
+    <li>Snap a meal photo (for AI nutrition analysis)</li>
+    <li>Scan a grocery receipt (for OCR parsing)</li>
+    <li>Take a workout selfie (for your workout recap card)</li>
+  </ul>
+  <p>
+    Photos you capture in the app are uploaded to Kodoma's storage so you can see
+    them on your timeline and share them with your crew if you choose. We don't
+    access your camera roll except when you explicitly ask Kodoma to save a workout
+    recap photo back to your photos.
+  </p>
+
+  <h3>Location</h3>
+  <p>
+    If you start a run, Kodoma uses your phone's GPS to map your route and calculate
+    distance and pace. This happens <strong>only while a run is active and the app is
+    in the foreground</strong>. We never track your location in the background, and
+    we never collect location data outside of an active run.
+  </p>
+
+  <h3>Activity in Kodoma</h3>
+  <p>The things you do inside the app:</p>
+  <ul>
+    <li>Workouts (gym sessions, runs, notes)</li>
+    <li>Meals you log</li>
+    <li>Grocery runs and items</li>
+    <li>Goals you set</li>
+    <li>Crew membership and crew messages</li>
+  </ul>
+
+  <h3>Push notification tokens</h3>
+  <p>
+    To send reminders, streak alerts, and crew notifications, we register a push
+    token with Apple Push Notification service (APNs) on iOS and Firebase Cloud
+    Messaging (FCM) on Android. These tokens identify your device, not you
+    personally.
+  </p>
+
+  <h3>Device &amp; diagnostic info</h3>
+  <p>
+    Basic device info (OS version, app version) and crash logs, so we can fix bugs.
+    No advertising IDs, no fingerprinting, no behavioral analytics.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       3. AI / THIRD PARTIES
+       ───────────────────────────────────────────────────────────── -->
+  <h2>3. AI features and third-party processors</h2>
+  <p>
+    A few features in Kodoma rely on AI services. When you use these features, the
+    relevant input is sent to a processor and a result is sent back. Here's exactly
+    who gets what:
+  </p>
+  <ul>
+    <li>
+      <strong>Google Gemini Vision API</strong> — when you snap a meal photo, the
+      image is sent to Gemini to identify the food and estimate nutrition.
+    </li>
+    <li>
+      <strong>Google Cloud Vision OCR</strong> — when you scan a receipt, the image
+      is sent to Cloud Vision to extract the line items and prices.
+    </li>
+    <li>
+      <strong>Anthropic Claude API</strong> — when you generate a meal plan or
+      workout plan, your dietary preferences, daily targets, and recent activity are
+      sent to Claude to generate the plan.
+    </li>
+  </ul>
+  <div class="callout">
+    All three services are used on their <strong>data-protected (zero-retention or
+    enterprise) tiers</strong>: your inputs are not used to train their models, and
+    they are not retained by the provider beyond the immediate request.
+  </div>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       4. HOW WE STORE & SECURE
+       ───────────────────────────────────────────────────────────── -->
+  <h2>4. How we store and secure your data</h2>
+  <p>
+    Kodoma's backend runs on Supabase (PostgreSQL) hosted in the United States.
+    Specifically:
+  </p>
+  <ul>
+    <li><strong>Encryption at rest</strong> — your data is encrypted on Supabase's servers.</li>
+    <li><strong>TLS in transit</strong> — all traffic between the app and our backend is HTTPS.</li>
+    <li><strong>Row-Level Security</strong> — Postgres policies enforce that only you (and people you've explicitly shared with) can read your records.</li>
+    <li><strong>Hashed passwords</strong> — passwords are stored using one-way hashing; nobody at Kodoma can see them.</li>
+    <li><strong>HTTPS only</strong> — the app and website refuse insecure connections.</li>
+  </ul>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       5. WHAT WE DON'T DO
+       ───────────────────────────────────────────────────────────── -->
+  <h2>5. What we don't do</h2>
+  <ul>
+    <li>We don't run ads in Kodoma.</li>
+    <li>We don't sell your personal data. Ever. To anyone.</li>
+    <li>We don't share your data with advertising networks or data brokers.</li>
+    <li>We don't use trackers or pixels for ad targeting.</li>
+    <li>We don't let third parties train their AI models on your inputs.</li>
+  </ul>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       6. CREW SHARING
+       ───────────────────────────────────────────────────────────── -->
+  <h2>6. What your crew can see</h2>
+  <p>
+    Kodoma is a social app, so some of your info is visible to people in groups
+    ("crews") you join. Here's the complete list of what other crew members can see:
+  </p>
+  <ul>
+    <li>Your username</li>
+    <li>Your first name</li>
+    <li>Your profile avatar (if you set one)</li>
+    <li>Workouts, meals, and grocery runs you've <strong>explicitly shared</strong> with that crew</li>
+    <li>Your scores on shared leaderboards and challenges</li>
+    <li>Messages you send in crew chat</li>
+  </ul>
+  <p>
+    Your full name, email, date of birth, weight, height, raw health metrics, and any
+    activity you didn't choose to share are <strong>not</strong> visible to anyone
+    else in Kodoma. Sharing a workout or meal with a crew is always an opt-in choice
+    when you log it.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       7. YOUR RIGHTS
+       ───────────────────────────────────────────────────────────── -->
+  <h2>7. Your rights and how to use them</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> the personal data we hold about you.</li>
+    <li><strong>Correct</strong> any inaccurate information (you can edit most of it directly in <strong>Profile → Edit profile</strong>).</li>
+    <li><strong>Delete</strong> your account and all associated data. Open <strong>Profile → Privacy &amp; Permissions → Delete my account</strong>. This runs a server-side <code>delete_user()</code> function that permanently removes your profile, meals, workouts, goals, group memberships, health summaries, and photos.</li>
+    <li><strong>Export</strong> your data. Email <a href="mailto:support@kodoma.app">support@kodoma.app</a> and we'll send you a JSON export within 30 days.</li>
+    <li><strong>Withdraw consent</strong> for any permission (Camera, Location, Health, Notifications) by toggling it off in your device's OS settings, or in <strong>Profile → Privacy &amp; Permissions</strong>.</li>
+    <li><strong>Opt out of health data sync</strong> entirely by disabling "Use Apple Health data" / "Use Health Connect data" in <strong>Profile → Privacy &amp; Permissions</strong>.</li>
+  </ul>
+  <p>
+    For GDPR-specific requests (data portability, the right to object, lodging a
+    complaint with a supervisory authority), email us — we'll respond within 30 days.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       8. CHILDREN
+       ───────────────────────────────────────────────────────────── -->
+  <h2>8. Children</h2>
+  <p>
+    Kodoma is not directed to children under 13, and we don't knowingly collect
+    information from anyone under 13. Depending on where you live, additional rules
+    apply for users between 13 and 18 — for example, the EU's GDPR-K requires
+    parental consent for users under 16 in some member states. If you're a parent or
+    guardian and you believe your child has signed up without your consent, email us
+    at <a href="mailto:support@kodoma.app">support@kodoma.app</a> and we'll delete
+    the account.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       9. INTERNATIONAL / LEGAL BASIS
+       ───────────────────────────────────────────────────────────── -->
+  <h2>9. International users (GDPR &amp; CCPA)</h2>
+  <p>
+    Kodoma's servers are located in the United States. If you use the app from
+    outside the U.S., your data will be transferred to and processed in the U.S.
+  </p>
+  <p>
+    <strong>If you're in the EU/UK (GDPR):</strong> our legal basis for processing
+    your data is your consent (when you grant permissions) and the performance of
+    our contract with you (when you create an account and use the app). You have the
+    right to access, correct, delete, port, restrict, or object to processing of
+    your data, and to lodge a complaint with your local data protection authority.
+  </p>
+  <p>
+    <strong>If you're in California (CCPA/CPRA):</strong> you have the right to know
+    what personal information we collect, to delete it, to correct it, and to opt
+    out of "sale" or "sharing" — though as noted, we don't sell or share personal
+    information in the way those terms are defined. You also have the right not to
+    be discriminated against for exercising any of these rights.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       10. DATA RETENTION
+       ───────────────────────────────────────────────────────────── -->
+  <h2>10. How long we keep your data</h2>
+  <p>
+    We keep your account data for as long as your account is active. When you delete
+    your account, your data is removed from our primary database immediately and
+    from backups within 30 days. Anonymous, aggregated metrics (e.g., total active
+    users) may be retained longer for product analytics.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       11. CHANGES
+       ───────────────────────────────────────────────────────────── -->
+  <h2>11. Changes to this policy</h2>
+  <p>
+    If we update this policy, we'll change the "Last updated" date at the top, and
+    for any material changes we'll notify you in the app or by email before the
+    change takes effect. The version at <a href="https://kodoma.app/privacy">kodoma.app/privacy</a>
+    is always current.
+  </p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       12. CONTACT
+       ───────────────────────────────────────────────────────────── -->
+  <h2>12. Contact us</h2>
+  <p>
+    Privacy questions, data requests, or just want to say hi:
+    <a href="mailto:support@kodoma.app">support@kodoma.app</a>.
+  </p>
+
+  <!-- Disclaimer -->
+  <p class="disclaimer">
+    This Privacy Policy is provided for informational purposes and does not constitute
+    legal advice. If you have specific legal concerns about your privacy rights or our
+    obligations, please consult a qualified attorney in your jurisdiction.
+  </p>
+
+  <!-- Footer -->
+  <div class="footer">
+    © Kodoma 2026 · made with care<br>
+    <a href="https://kodoma.app">kodoma.app</a> ·
+    <a href="mailto:support@kodoma.app">support@kodoma.app</a>
+  </div>
+
+</div>
+
+</body>
+</html>
