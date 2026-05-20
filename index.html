@@ -124,6 +124,28 @@
   }
   .signup button:hover { background: #FF6B47; transform: translateY(-1px); }
   .signup button:active { transform: translateY(0); }
+  .signup button:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+  .form-status {
+    margin-top: 14px;
+    font-size: 13px;
+    min-height: 18px;
+    color: #909090;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .form-status.visible { opacity: 1; }
+  .form-status.error { color: #E84545; }
+
+  .signup-success {
+    margin-top: 34px;
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: #909090;
+    line-height: 1.55;
+    max-width: 460px;
+    opacity: 0;
+    animation: fade-in 0.5s ease-out forwards;
+  }
 
   .footer {
     position: absolute;
@@ -340,12 +362,14 @@
   <div class="title-block">
     <div class="eyebrow">Kodoma</div>
     <h1>coming&nbsp;soon</h1>
-    <p class="subtitle">A quieter way to track your health. We're putting the finishing touches on it. Drop your email to be the first to know when we launch.</p>
+    <p class="subtitle">A quieter way to track your health. We're putting the finishing touches on it. Drop your name and email to be the first to know when we launch.</p>
 
-    <form class="signup" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks ✓'; this.querySelector('input').value='';">
-      <input type="email" placeholder="your@email.com" required>
+    <form class="signup" id="waitlist-form">
+      <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" maxlength="50" required>
+      <input type="email" name="email" placeholder="your@email.com" required>
       <button type="submit">Notify me</button>
     </form>
+    <p class="form-status" id="form-status"></p>
   </div>
 
   <div class="kodoma-stage">
@@ -434,5 +458,76 @@
   <div class="footer">© Kodoma 2026 · made with care</div>
 
 </div>
+
+<script>
+  // ────────────────────────────────────────────────────────────
+  // Kodoma waitlist signup → Supabase
+  // The anon key is safe to expose; RLS policy is INSERT-only.
+  // ────────────────────────────────────────────────────────────
+  const SUPABASE_URL = 'https://aywvoukhvnznqyjffdnd.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5d3ZvdWtodm56bnF5amZmZG5kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MDQyNzIsImV4cCI6MjA5MTI4MDI3Mn0.e3yyLXD8HYGkEwY-IJm5gEXxakFi2BInU-Juir9rA2k';
+
+  const form = document.getElementById('waitlist-form');
+  const status = document.getElementById('form-status');
+
+  function showError(msg) {
+    status.textContent = msg;
+    status.className = 'form-status visible error';
+  }
+  function clearStatus() {
+    status.textContent = '';
+    status.className = 'form-status';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nameInput = form.querySelector('input[name="first_name"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const button = form.querySelector('button');
+    const firstName = nameInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!firstName || !email) return;
+
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    clearStatus();
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          first_name: firstName,
+          email: email,
+          source: 'kodoma.app',
+          user_agent: navigator.userAgent
+        })
+      });
+
+      // 2xx → new row. 409 → already on the list. Either way they're in;
+      // show the same quiet confirmation and don't surface duplicate status.
+      if (res.ok || res.status === 409) {
+        const msg = document.createElement('p');
+        msg.className = 'signup-success';
+        msg.textContent = `Thanks, ${firstName}! We'll let you know when Kodoma is ready.`;
+        form.replaceWith(msg);
+        clearStatus();
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+    } catch (err) {
+      console.error('Waitlist signup failed:', err);
+      button.disabled = false;
+      button.textContent = 'Notify me';
+      showError("Hmm, that didn't go through — mind trying again?");
+    }
+  });
+</script>
 </body>
 </html>
